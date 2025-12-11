@@ -1,0 +1,79 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+.env
+.mcp.json
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+.DS_Store
+
+# Task files
+# tasks.json
+# tasks/
+
+# PDF files (academic papers - large files, copyright issues)
+*.pdf
+
+# Converted markdown output (build artifacts)
+converted_md.md
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+
+# Type checking & Linting
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Cursor
+.cursor/
+
+# Backup files
+*.bak
+*~
+
+# Local env variations
+.env.local
+.env.*.local
+
+# AI tools
+.taskmaster/
+.serena/
+
+# settings
+config/settings.json

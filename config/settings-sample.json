@@ -1,0 +1,28 @@
+{
+    "input_path": "D:/02_Area/Obsidian/ObsidianPaper/01_Papers/SPH/PDFs/jacob2021.pdf",
+    "output_path": "D:/02_Area/Obsidian/ObsidianPaper/01_Papers/SPH/MDs",
+    "keyword_file_path": "D:/02_Area/academic-paper-agent/config/keyworks.json",
+    "target_language": "ko",
+    "max_analysis_length": 1000,
+    "paper_type": "auto",
+    "llm": {
+        "default_model": "openai:gpt-4o-mini",
+        "nodes": {
+            "extract_title": "openai:gpt-4o-mini",
+            "extract_abstract": "openai:gpt-4o-mini",
+            "extract_conclusion": "openai:gpt-4o-mini",
+            "extract_basic_info": "openai:gpt-4o-mini",
+            "extract_keywords": "openai:gpt-4o-mini",
+            "extract_sections": "openai:gpt-4o-mini",
+            "detect_paper_type": "openai:gpt-4o-mini",
+            "extract_dynamic_sections": "openai:gpt-4o-mini",
+            "analize_background": "openai:gpt-4o-mini",
+            "analize_research_purpose": "openai:gpt-4o-mini",
+            "analize_methodologies": "openai:gpt-4o-mini",
+            "analize_result": "openai:gpt-4o-mini",
+            "analize_identify_keypoints": "openai:gpt-4o-mini",
+            "analyze_dynamic_section": "openai:gpt-4o-mini",
+            "translate_analysis": "openai:gpt-4o-mini"
+        }
+    }
+}
