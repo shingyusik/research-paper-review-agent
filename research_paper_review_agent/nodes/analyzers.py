@@ -1,3 +1,4 @@
+import re
 from typing import Dict
 
 from ..core.state import State
@@ -5,6 +6,12 @@ from ..services.llm_service import get_llm
 from ..services.config_service import get_max_analysis_length
 from ..utils.helpers import _get_full_text
 from ..utils.logger import get_logger
+
+
+def _add_line_breaks(text: str) -> str:
+    """Add line breaks before bullet points that are on the same line."""
+    text = re.sub(r' +- ', '\n- ', text)
+    return text
 
 
 def _get_section_or_full_text(state: State, section_name: str) -> str:
@@ -47,7 +54,7 @@ Paper Content:
 Research Background Analysis:"""
 
     response = llm.invoke(prompt)
-    background = response.content.strip()
+    background = _add_line_breaks(response.content.strip())
     logger.info("연구 배경 분석 완료")
 
     return {"background": background}
@@ -86,7 +93,7 @@ Paper Content:
 Research Purpose Analysis:"""
 
     response = llm.invoke(prompt)
-    research_purpose = response.content.strip()
+    research_purpose = _add_line_breaks(response.content.strip())
     logger.info("연구 목적 분석 완료")
 
     return {"research_purpose": research_purpose}
@@ -126,7 +133,7 @@ Paper Content:
 Methodology Analysis:"""
 
     response = llm.invoke(prompt)
-    methodologies = response.content.strip()
+    methodologies = _add_line_breaks(response.content.strip())
     logger.info("방법론 분석 완료")
 
     return {"methodologies": methodologies}
@@ -166,7 +173,7 @@ Paper Content:
 Results Analysis:"""
 
     response = llm.invoke(prompt)
-    results = response.content.strip()
+    results = _add_line_breaks(response.content.strip())
     logger.info("결과 분석 완료")
 
     return {"results": results}
@@ -206,7 +213,7 @@ Paper Content:
 Key Contributions and Differentiators:"""
 
     response = llm.invoke(prompt)
-    keypoints = response.content.strip()
+    keypoints = _add_line_breaks(response.content.strip())
     logger.info("핵심 포인트 분석 완료")
 
     return {"keypoints": keypoints}
@@ -258,7 +265,7 @@ Section Content:
 Section Summary:"""
 
     response = llm.invoke(prompt)
-    analysis = response.content.strip()
+    analysis = _add_line_breaks(response.content.strip())
     
     logger.info(f"동적 섹션 분석 완료: '{section_name}' ({len(analysis)}자)")
     
