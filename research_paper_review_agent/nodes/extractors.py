@@ -169,7 +169,8 @@ Return only keywords that are actually mentioned in the title or abstract."""
     re_extracted_keywords = result.keywords
     
     extracted_keywords_set = set(extracted_keywords)
-    new_keywords = [kw for kw in re_extracted_keywords if kw not in extracted_keywords_set]
+    re_extracted_keywords_set = set(re_extracted_keywords)
+    new_keywords = [kw for kw in re_extracted_keywords_set if kw not in extracted_keywords_set]
     
     all_keywords = extracted_keywords + new_keywords
     
@@ -186,14 +187,15 @@ def add_synonyms_to_keywords(state: State) -> Dict[str, List[str]]:
     keywords = state.get("keywords", [])
     keyword_synonyms = state.get("keyword_synonyms", {})
     
-    final_keywords = list(keywords)
+    final_keywords_set = set(keywords)
     
     for keyword in keywords:
         if keyword in keyword_synonyms:
             synonyms = keyword_synonyms[keyword]
             for synonym in synonyms:
-                if synonym not in final_keywords:
-                    final_keywords.append(synonym)
+                final_keywords_set.add(synonym)
+    
+    final_keywords = list(final_keywords_set)
     
     logger.info(f"동의어 추가 완료: 기존 {len(keywords)}개 + 동의어 추가 = 총 {len(final_keywords)}개")
     
