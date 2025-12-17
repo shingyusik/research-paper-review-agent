@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Dict, List
 
 from ..core.state import State, BasicInfo
@@ -233,8 +234,10 @@ def add_new_keywords_to_file(state: State) -> Dict:
         
         added_count = 0
         for new_keyword in new_keywords:
-            if new_keyword not in keyword_data:
-                keyword_data[new_keyword] = []
+            cleaned_keyword = re.sub(r'\([^)]*\)|\[[^\]]*\]|\{[^}]*\}', '', new_keyword)
+            cleaned_keyword = re.sub(r'\s+', ' ', cleaned_keyword).strip()
+            if cleaned_keyword and cleaned_keyword not in keyword_data:
+                keyword_data[cleaned_keyword] = []
                 added_count += 1
         
         if added_count > 0:
