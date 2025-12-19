@@ -118,7 +118,6 @@ def _translate_standard_analysis(state: State, target_language: str, language_na
         
         prompt = f"""Translate the following academic paper analysis sections into {language_name}.
 Maintain the academic tone and technical terminology.
-CRITICAL: Preserve the original line breaks and bullet point/numbering format exactly as in the source text.
 
 [Background]
 {fields_to_translate.get('background', '')}
@@ -172,12 +171,11 @@ def _translate_batch_sections(llm, batch: Dict[str, str], language_name: str, lo
     
     prompt = f"""Translate the following academic paper section analyses into {language_name}.
 Maintain the academic tone and technical terminology.
-CRITICAL: Preserve the original line breaks and bullet point/numbering format exactly as in the source text.
 
 You MUST translate ALL {len(batch_keys)} sections below.
 For each section, return an item with:
 - key: the EXACT section name as provided (e.g., "{batch_keys[0]}")
-- value: the translated text in {language_name} (preserve line breaks)
+- value: the translated text in {language_name}
 
 Sections to translate:
 

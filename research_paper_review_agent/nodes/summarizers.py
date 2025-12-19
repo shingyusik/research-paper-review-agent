@@ -22,16 +22,7 @@ def _generate_frontmatter(title: str, basic_info: dict, keywords: List[str], pdf
         kw = kw.replace('+', '')
         kw = kw.replace(' ', '_').strip('_')
         return kw
-    
-    sanitized_keywords = [sanitize_keyword(kw) for kw in keywords]
-    unique_sanitized = []
-    seen = set()
-    for kw in sanitized_keywords:
-        if kw and kw not in seen:
-            unique_sanitized.append(kw)
-            seen.add(kw)
-    
-    tags_str = "\n".join(f"  - {kw}" for kw in unique_sanitized) if unique_sanitized else ""
+    tags_str = "\n".join(f"  - {sanitize_keyword(kw)}" for kw in keywords) if keywords else ""
     paper_link = f"[[{pdf_filename}.pdf]]" if pdf_filename else ""
 
     frontmatter = f"""---

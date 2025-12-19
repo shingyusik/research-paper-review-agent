@@ -1,5 +1,4 @@
 import json
-import re
 from typing import Dict, List
 
 from ..core.state import State, BasicInfo
@@ -169,8 +168,7 @@ Return only keywords that are actually mentioned in the title or abstract."""
     re_extracted_keywords = result.keywords
     
     extracted_keywords_set = set(extracted_keywords)
-    re_extracted_keywords_set = set(re_extracted_keywords)
-    new_keywords = [kw for kw in re_extracted_keywords_set if kw not in extracted_keywords_set]
+    new_keywords = [kw for kw in re_extracted_keywords if kw not in extracted_keywords_set]
     
     all_keywords = extracted_keywords + new_keywords
     
@@ -187,15 +185,14 @@ def add_synonyms_to_keywords(state: State) -> Dict[str, List[str]]:
     keywords = state.get("keywords", [])
     keyword_synonyms = state.get("keyword_synonyms", {})
     
-    final_keywords_set = set(keywords)
+    final_keywords = list(keywords)
     
     for keyword in keywords:
         if keyword in keyword_synonyms:
             synonyms = keyword_synonyms[keyword]
             for synonym in synonyms:
-                final_keywords_set.add(synonym)
-    
-    final_keywords = list(final_keywords_set)
+                if synonym not in final_keywords:
+                    final_keywords.append(synonym)
     
     logger.info(f"동의어 추가 완료: 기존 {len(keywords)}개 + 동의어 추가 = 총 {len(final_keywords)}개")
     
@@ -236,10 +233,8 @@ def add_new_keywords_to_file(state: State) -> Dict:
         
         added_count = 0
         for new_keyword in new_keywords:
-            cleaned_keyword = re.sub(r'\([^)]*\)|\[[^\]]*\]|\{[^}]*\}', '', new_keyword)
-            cleaned_keyword = re.sub(r'\s+', ' ', cleaned_keyword).strip()
-            if cleaned_keyword and cleaned_keyword not in keyword_data:
-                keyword_data[cleaned_keyword] = []
+            if new_keyword not in keyword_data:
+                keyword_data[new_keyword] = []
                 added_count += 1
         
         if added_count > 0:

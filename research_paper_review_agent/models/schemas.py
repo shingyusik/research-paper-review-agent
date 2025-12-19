@@ -147,8 +147,3 @@ class DynamicSection(BaseModel):
 class DynamicSectionRanges(BaseModel):
     """List of dynamically detected sections."""
     sections: List[DynamicSection] = Field(default_factory=list, description="List of detected sections")
-
-
-class BulletPoints(BaseModel):
-    """Structured output for bullet point analysis."""
-    points: List[str] = Field(default_factory=list, description="List of bullet point items")

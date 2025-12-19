@@ -1,5 +1,6 @@
 from .config_service import (
     load_config,
+    set_config,
     get_config,
     get_config_dict,
     get_llm_model,
@@ -10,6 +11,7 @@ from .llm_service import get_llm, clear_llm_cache
 
 __all__ = [
     "load_config",
+    "set_config",
     "get_config",
     "get_config_dict",
     "get_llm_model",
