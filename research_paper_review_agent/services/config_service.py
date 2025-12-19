@@ -72,6 +72,13 @@ def load_config(config_path: str = None) -> Settings:
     return settings
 
 
+def set_config(settings: Settings) -> None:
+    """Set configuration directly (used by GUI)."""
+    global _config
+    load_env()
+    _config = settings
+
+
 def get_config() -> Settings:
     """Get the current configuration, loading it if necessary.
 

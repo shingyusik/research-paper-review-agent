@@ -38,6 +38,8 @@ node_modules/
 
 # PDF files (academic papers - large files, copyright issues)
 *.pdf
+# Exception: PDF files in sample_01 folder
+!PDF/sample_01/*.pdf
 
 # Converted markdown output (build artifacts)
 converted_md.md
