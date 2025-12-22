@@ -44,8 +44,9 @@ OPENAI_API_KEY=your_api_key_here
 
 ```json
 {
-    "input_path": "경로/논문.pdf",
-    "output_path": "경로/출력디렉토리",
+    "input_path": "PDF/sample_01/2508.19205v1.pdf",
+    "output_path": "PDF/sample_01",
+    "keyword_file_path": "config/keywords.json",
     "target_language": "ko",
     "max_analysis_length": 1000,
     "paper_type": "auto",
